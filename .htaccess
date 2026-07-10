@@ -1,0 +1,28 @@
+RewriteEngine On
+RewriteBase /
+
+# Prevent directory listing
+Options -Indexes
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "^(config\.php|database\.php|functions\.php)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Enforce HTTPS (Uncomment if SSL is active)
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Block common malicious requests
+RewriteCond %{QUERY_STRING} (eval\() [NC,OR]
+RewriteCond %{QUERY_STRING} (127\.0\.0\.1) [NC,OR]
+RewriteCond %{QUERY_STRING} ([a-zA-Z0-9_]=http://) [NC,OR]
+RewriteCond %{QUERY_STRING} ([a-zA-Z0-9_]=(\.\.//?)+) [NC,OR]
+RewriteCond %{QUERY_STRING} ([a-zA-Z0-9_]=/([a-z0-9_.]//?)+) [NC]
+RewriteRule ^(.*)$ - [F,L]
