@@ -1,0 +1,27 @@
+# Ignore everything by default
+*
+
+# Allow directories containing the allowed files
+!config/
+!includes/
+!auth/
+!users/
+!sql/
+
+# Allow specific files
+!.htaccess
+!config/database.php
+!includes/functions.php
+!includes/auth_check.php
+!auth/login.php
+!auth/register.php
+!auth/logout.php
+!users/index.php
+!users/create.php
+!users/edit.php
+!users/delete.php
+!users/profile.php
+!sql/schema.sql
+!sql/dummy_data.sql
+!index.php
+!.gitignore
